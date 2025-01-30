@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useAuth } from "@/contexts/AuthContext"; // Importing useAuth to handle authentication context
+import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Card } from "@/components/ui/card";
-import { Loader2, Plus, Pencil, Trash2, LogOut } from "lucide-react"; // Adding the LogOut icon
+import { Loader2, Plus, Pencil, Trash2, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import {
   Table,
@@ -17,7 +17,7 @@ import {
 import { format } from "date-fns";
 import { RecordDialog } from "@/components/RecordDialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useNavigate } from "react-router-dom"; // Importing useNavigate for routing
+import { useNavigate } from "react-router-dom";
 
 interface Record {
   _id: string;
@@ -33,8 +33,8 @@ const Dashboard = () => {
   const { theme, setTheme } = useTheme();
   const queryClient = useQueryClient();
   const { toast } = useToast();
-  const { logout } = useAuth(); // Using logout function from AuthContext
-  const navigate = useNavigate(); // Initialize navigation hook
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -154,20 +154,20 @@ const Dashboard = () => {
   };
 
   const handleLogout = () => {
-    logout(); // Calling logout from AuthContext
-    toast({ title: "Success", description: "Logout successful", variant: "success" }); // Show logout success toast
-    navigate('/login'); // Redirecting to login page after logout
+    logout();
+    toast({ title: "Success", description: "Logout successful", variant: "success" });
+    navigate('/login');
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 p-8 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 p-4 sm:p-6 lg:p-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto space-y-8 animate-fadeIn">
-        <div className="flex justify-between items-center">
-          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-black to-black">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-black to-black">
             Dashboard
           </h1>
-          <div className="flex gap-4">
-            <Button onClick={handleAdd} className="glass">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            <Button onClick={handleAdd} className="glass mb-4 sm:mb-0">
               <Plus className="mr-2 h-4 w-4" /> Add New Record
             </Button>
             <Button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg flex items-center gap-2">
@@ -205,7 +205,7 @@ const Dashboard = () => {
                     <TableCell>{format(new Date(record.dob), "PP")}</TableCell>
                     <TableCell>{record.age}</TableCell>
                     <TableCell>
-                      <div className="flex space-x-2">
+                      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                         <Button
                           variant="outline"
                           size="icon"
